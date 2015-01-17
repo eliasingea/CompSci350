@@ -1,0 +1,25 @@
+import os
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/')
+def mainIndex():
+	president = 'Chris Hiponia'
+	##currentProject = {'company': 'FliteTest', 'plane':  "Mini Cruiser", 'cost': 15}
+	playing = False
+	date = 'Monday\'s and Thursday\'s'
+	time = '7 - 9 PM'
+	place = 'The Cage!'
+	videos = [{'title': 'Best Dangles in Hockey', 'vidLink': '0otLHeiYeDA', 'description': 'Here are some of Hockey\'s greatest Dangles and plays, enjoy!'}, 
+		{'title': 'The Best Hockey Plays', 'vidLink': 'a7G0xYXP1gA', 'description': 'Some more insane hockey plays'}]
+	
+	return render_template('index.html', post=videos, president=president, playing=playing, date=date, time=time, place=place)
+
+@app.route('/members')
+def member():
+	members = {'Micheal', 'quinn', 'chris', 'Anna', 'Aaron'}
+	##return 'hello there'
+	return render_template('members.html', members=members)
+
+if __name__ == '__main__':
+   app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), debug=True)
